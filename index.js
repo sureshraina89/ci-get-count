@@ -1,11 +1,9 @@
 const { scrapeLogic } = require("./scrapeLogic");
 const express = require('express');
 const cors = require('cors');
-const exec = require('child_process').exec;
 const path = require('path');
 const fs = require('fs');
 const cron = require('node-cron');
-const puppeteer = require('puppeteer');
 
 const app = express();
 app.use(cors()); // Enable CORS for all routes
