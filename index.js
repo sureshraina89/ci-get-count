@@ -1,4 +1,3 @@
-const { scrapeLogic } = require("./scrapeLogic");
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -8,6 +7,7 @@ const cron = require('node-cron');
 const app = express();
 app.use(cors()); // Enable CORS for all routes
 const PORT = process.env.PORT || 3000; // Replace with your desired port number
+const { scrapeLogic } = require("./scrapeLogic");
 const admin = require('firebase-admin');
 const config = 'newConfiguration';
 
