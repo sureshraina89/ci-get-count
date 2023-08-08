@@ -17,9 +17,9 @@ const scrapeLogic = async (res, list) => {
   });
   const result = [];
   try {
-    const page = await browser.newPage();
+      const page = await browser.newPage();
 
-   // list.forEach(async (element) => {
+    // list.forEach(async (element) => {
       await page.goto('https://chartink.com/screener/all-cross-91');
       // Set screen size
       await page.setViewport({ width: 1080, height: 1024 });
@@ -32,8 +32,8 @@ const scrapeLogic = async (res, list) => {
       });
       result.push({name: element.name, count: inputValue});
     //});
-
-    res.send(result);
+      await page.close();
+      res.send(result);
   } catch (e) {
     console.error(e);
     res.send(`Something went wrong while running Puppeteer: ${e}`);
