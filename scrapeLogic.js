@@ -3,17 +3,7 @@ require("dotenv").config();
 
 const scrapeLogic = async (res, list) => {
   const browser = await puppeteer.launch({
-    headless:'new',
-    args: [
-      "--disable-setuid-sandbox",
-      "--no-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
+    headless:'new'
   });
   const result = [];
   try {
@@ -22,10 +12,10 @@ const scrapeLogic = async (res, list) => {
     // list.forEach(async (element) => {
       await page.goto('https://chartink.com/screener/all-cross-91');
       // Set screen size
-      await page.setViewport({ width: 1080, height: 1024 });
+      //await page.setViewport({ width: 1080, height: 1024 });
 
       // Wait for the page to load
-      await page.waitForLoadState('domcontentloaded');
+      //await page.waitForLoadState('domcontentloaded');
 
       await page.waitForSelector('#DataTables_Table_0_info');
           // Get the value of an input element using its selector
