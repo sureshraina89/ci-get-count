@@ -6,7 +6,8 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm ci
+RUN rm -rf node_modules rm -f package-lock.json npm cache clean --force npm ci
+
 COPY . .
 CMD [ "node", "index.js" ]
 
