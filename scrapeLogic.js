@@ -26,7 +26,7 @@ const scrapeLogic = async (res, list) => {
       result.push({name: element.name, count: inputValue});
     //});
       await page.close();
-      res.send(result);
+      res.json(result);
   } catch (e) {
     console.error(e);
     res.send(`Something went wrong while running Puppeteer: ${e}`);

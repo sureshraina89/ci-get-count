@@ -136,7 +136,7 @@ async function runProcessExec(res) {
 
 app.get('/api/run', async(req, res) => {
   const result = await runProcessExec(res);
-  res.json(result);
+  //res.json(result);
   // setTimeout(() => {
   //   //res.sendStatus(200);
   //   getCount();
