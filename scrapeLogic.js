@@ -10,7 +10,7 @@ const scrapeLogic = async (res, list) => {
       const page = await browser.newPage();
 
     // list.forEach(async (element) => {
-      await page.goto('https://chartink.com/screener/all-cross-91', { timeout: 60000 });
+      await page.goto('https://chartink.com/screener/weekly-rsi-overbought-oversold-scan', { timeout: 60000 });
       // Set screen size
       //await page.setViewport({ width: 1080, height: 1024 });
 
