@@ -19,8 +19,8 @@ const scrapeLogic = async (res, list) => {
   try {
     const page = await browser.newPage();
 
-    list.forEach(async (element) => {
-      await page.goto(element.url);
+   // list.forEach(async (element) => {
+      await page.goto('https://chartink.com/screener/all-cross-91');
       // Set screen size
       await page.setViewport({ width: 1080, height: 1024 });
           // Get the value of an input element using its selector
@@ -29,7 +29,7 @@ const scrapeLogic = async (res, list) => {
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
       result.push({name: element.name, count: inputValue});
-    });
+    //});
 
     res.send(result);
   } catch (e) {
