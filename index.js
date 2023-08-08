@@ -134,7 +134,7 @@ async function runProcessExec(res) {
   return await scrapeLogic(res, await getAllDocuments(config));
 }
 
-app.post('/api/run', async(req, res) => {
+app.get('/api/run', async(req, res) => {
   const result = await runProcessExec();
   res.json(result);
   // setTimeout(() => {
