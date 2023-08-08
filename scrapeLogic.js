@@ -23,7 +23,7 @@ const scrapeLogic = async (res, list) => {
         const text = input.textContent;
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
-      result.push({name: element.name, count: inputValue});
+      result.push({name: "element.name", count: inputValue});
     //});
       await page.close();
       res.json(result);
