@@ -24,6 +24,9 @@ const scrapeLogic = async (res, list) => {
       // Set screen size
       await page.setViewport({ width: 1080, height: 1024 });
 
+      // Wait for the page to load
+      await page.waitForLoadState('domcontentloaded');
+
       await page.waitForSelector('#DataTables_Table_0_info');
           // Get the value of an input element using its selector
       const inputValue = await page.$eval('#DataTables_Table_0_info', (input) => {
