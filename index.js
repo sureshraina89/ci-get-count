@@ -28,6 +28,7 @@ const filePath = `download/data-${formattedNewDate}.json`;
 // Enable JSON request body parsing
 // Initialize Firebase Admin SDK with your service account credentials
 const serviceAccount = require('./serviceAccountKey.json'); // Update with your own path
+const { async } = require('@firebase/util');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://trend-analysis-app-default-rtdb.asia-southeast1.firebasedatabase.app"
@@ -131,12 +132,17 @@ const getCount = async () => {
 };
 
 async function runProcessExec(res) {
-  return await scrapeLogic(res, await getAllDocuments(config));
+  const list = await getAllDocuments(config);
+  results = [];
+  list.forEach(async(a) => {
+    results.push(await scrapeLogic(a));
+  })
+  return results;
 }
 
 app.get('/api/run', async(req, res) => {
-  const result = await runProcessExec(res);
-  //res.json(result);
+  const result = await runProcessExec();
+  res.json(result);
   // setTimeout(() => {
   //   //res.sendStatus(200);
   //   getCount();
