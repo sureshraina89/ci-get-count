@@ -7,10 +7,10 @@ const scrapeLogic = async (res, list) => {
   });
   const result = [];
   try {
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36');
     
     list.forEach(async (element) => {
-      const page = await browser.newPage();
-      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36');
       const url = element.url;
       await page.goto('https://chartink.com/screener/weekly-rsi-overbought-oversold-scan', { waitUntil: 'domcontentloaded' });
       // Set screen size
@@ -26,9 +26,9 @@ const scrapeLogic = async (res, list) => {
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
       result.push({name: element.name, count: inputValue});
-      await page.close();
     });
-      res.json(result);
+    await page.close();
+    res.json(result);
   } catch (e) {
     console.error(e);
     res.send(`Something went wrong while running Puppeteer: ${e}`);
