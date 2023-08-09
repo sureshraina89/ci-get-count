@@ -12,7 +12,7 @@ const scrapeLogic = async (res, list) => {
 
     list.forEach(async (element) => {
       const url = element.url;
-      await page.goto(url, { timeout: 100000 });
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
       // Set screen size
       //await page.setViewport({ width: 1080, height: 1024 });
 
