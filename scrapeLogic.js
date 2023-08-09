@@ -1,15 +1,17 @@
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 
-const scrapeLogic = async (element) => {
+const scrapeLogic = async (res, list) => {
   const browser = await puppeteer.launch({
     headless:'new'
   });
-  const result = null;
+  const result = [];
   try {
       const page = await browser.newPage();
-      console.log(element);
-      await page.goto(element.url, { timeout: 100000 });
+
+    list.forEach(async (element) => {
+      const url = element.url;
+      await page.goto(url, { timeout: 100000 });
       // Set screen size
       //await page.setViewport({ width: 1080, height: 1024 });
 
@@ -22,12 +24,13 @@ const scrapeLogic = async (element) => {
         const text = input.textContent;
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
-      result = {name: element.name, count: inputValue};
+      result.push({name: element.name, count: inputValue});
+    });
       await page.close();
-      return result;
+      res.json(result);
   } catch (e) {
     console.error(e);
-     return `Something went wrong while running Puppeteer: ${e}`;
+    res.send(`Something went wrong while running Puppeteer: ${e}`);
   } finally {
     await browser.close();
   }
