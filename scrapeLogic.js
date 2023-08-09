@@ -26,8 +26,8 @@ const scrapeLogic = async (res, list) => {
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
       result.push({name: element.name, count: inputValue});
-    });
       await page.close();
+    });
       res.json(result);
   } catch (e) {
     console.error(e);
