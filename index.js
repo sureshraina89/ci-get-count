@@ -133,7 +133,7 @@ const getCount = async () => {
 
 async function runProcessExec(res) {
   const list = await getAllDocuments(config);
-  results = [];
+  const results = [];
   list.forEach(async(a) => {
     results.push(await scrapeLogic(a));
   })
