@@ -9,8 +9,8 @@ const scrapeLogic = async (res, list) => {
   try {
       const page = await browser.newPage();
 
-    // list.forEach(async (element) => {
-      await page.goto('https://chartink.com/screener/weekly-rsi-overbought-oversold-scan', { timeout: 60000 });
+    list.forEach(async (element) => {
+      await page.goto(element.url, { timeout: 60000 });
       // Set screen size
       //await page.setViewport({ width: 1080, height: 1024 });
 
@@ -23,8 +23,8 @@ const scrapeLogic = async (res, list) => {
         const text = input.textContent;
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
-      result.push({name: "element.name", count: inputValue});
-    //});
+      result.push({name: element.name, count: inputValue});
+    });
       await page.close();
       res.json(result);
   } catch (e) {
