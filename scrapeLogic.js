@@ -10,8 +10,8 @@ const scrapeLogic = async (res, list) => {
     const page = await browser.newPage();
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36');
     
-    list.forEach(async (element) => {
-      const url = element.url;
+    //list.forEach(async (element) => {
+      const url = list[0].url;
       await page.goto('https://chartink.com/screener/weekly-rsi-overbought-oversold-scan', { waitUntil: 'domcontentloaded' });
       // Set screen size
       //await page.setViewport({ width: 1080, height: 1024 });
@@ -25,8 +25,8 @@ const scrapeLogic = async (res, list) => {
         const text = input.textContent;
         return text.split(' ')[1] ? text.split(' ')[1].replace(',', ''): text.split(' ')[1];
       });
-      result.push({name: element.name, count: inputValue});
-    });
+      result.push({name: list[0].name, count: inputValue});
+    //});
     await page.close();
     res.json(result);
   } catch (e) {
